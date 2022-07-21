@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: 'Open Sans Condensed', sans-serif;
+    height: 100%;
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.8em;
+    color: #666;
+}
+
+.pimg1, .pimg2, .pimg3{
+    position: relative;
+    opacity: 0.80;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    transition: all 0.2s cubic-bezier(0.51, 0.53, 0.6, 0.6);
+}
+
+.pimg1{
+    width: 100%;
+    height: 950px;
+}
+
+.pimg2{
+    height: 400px;
+    width: 100%;
+}
+
+.pimg3{
+    height: 400px;
+    width: 100%;
+}
+
+.section{
+    text-align: center;
+    padding: 50px 80px;
+}
+.section p{
+    text-indent: 1.5em;
+    text-align: justify;
+    white-space: pre-line;
+    margin: 20px 10px;
+    font-size: 20px;
+    line-height: 30px;
+    -webkit-columns: 250px 3;
+    -moz-columns: 250px 3;
+    columns: 250px 3;
+    -webkit-columns-gap: 40px;
+    -moz-column-gap: 40px;
+    column-gap: 40px;
+}
+.section-light{
+    background-color: #f4f4f4;
+    color: #666;
+}
+
+.section-dark{
+    background-color: #282e34;
+    color: #ddd;
+    padding: auto 100px;
+    justify-text:center;
+}
+
+.ptext {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 27px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+
+.ptext .border{
+    background-color: #111;
+    color: #fff;
+    padding: 20px 200px;
+    border-radius: 5px;
+}
+
+.border {
+    border: 1px solid #3e3e3e!important;
+}
+
+.ptext .border.trans{
+    background-color: transparent;
+}
+
+.logout{
+    padding: 5px 13px !important;
+}
+
+.fas.fa-bars{
+    display: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 3em;
+    transition: background 250ms ease-in;
+    background: #f4f4f4;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+.logo__site--image{
+    content: url('../../images/attachment.png');
+}
+.header__logo {
+    color: #eeee;
+    font-weight: 600;
+}
+
+.nav__list{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.
+.nav__item {
+    margin: 0 8px;
+}
+
+.nav__link {
+    letter-spacing: 3px;
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    padding: 0.5em 1em;
+    position: relative;
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-size: .9rem;
+    font-weight: 600;
+}
+.nav__link--btn {
+    border: 1.5px solid;
+    border-radius: 2em;
+    margin-left: 1em;
+    transition: background 250ms ease-in-out;
+    letter-spacing: 1px;
+    padding: 0.5em 2.5em !important;
+}
+
+.nav__link--add:hover {
+    background-color: #00abd5;
+}
+
+.header__toggle,
+.header__close
+{
+    display: none;
+}
+
+@media(max-width: 1580px){
+    .head.head-info{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 28px;
+    }
+    .logo a{
+        font-size: 0.9rem;
+    }
+    .header__toggle{
+        display: inline;
+        color: #eeee;
+        font-size: 24px;
+    }
+}
+
+@media(max-width: 1150px){
+    .header__toggle{
+        display: none;
+    }
+    .fas.fa-bars{
+        display: block;
+        color: #eeee;
+        z-index: 1000;
+    }
+    .header__close {
+        position: absolute;
+        right: 24px;
+        display: block;
+        font-size: 24px;
+    }
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        color: #eeee;
+        width: 60%;
+    }
+
+}
+
+.rate-form{
+    transition: all 0.8s cubic-bezier(0.51, 0.53, 0.6, 0.6);
+}
+
+.fas.fa-angle-double-left{
+    margin-right: 5px;
+}
+
+.checked {
+    color: yellow;
+}
+
+.my-btn {
+    background-color: inherit !important;
+    border: 0 !important;
+}
+
+/* functionality for about  popup */
+
