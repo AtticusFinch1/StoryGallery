@@ -1,0 +1,279 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/publish.css' %}">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/727277d0a7.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- Add Modal -->
+
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                      <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add a Publication</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                      </div>
+                      <div class="modal-body">
+                             <form method="POST" action="" enctype="multipart/form-data" id="add_post_form">
+                                 {% csrf_token %}
+                                 <div class="message-success"></div>
+                                 <div class="form-group m-3">
+                                     <label>Author</label>
+                                     <input required name="title" type="text" placeholder="Author" class="form-control author-field">
+                                 </div>
+                                 <div class="form-group m-3">
+                                     <label>Title</label>
+                                     <input required name="title" type="text" placeholder="Enter a title" class="form-control title-field">
+                                 </div>
+                                 <div class="form-group m-3">
+                                     <label>Country</label>
+                                     <input required name="country" placeholder="Country" class="form-control descr-field">
+                                 </div>
+                                 <div class="form-group m-3">
+                                     <label>Category</label>
+                                     <select required name="category" class="form-control category-field">
+                                         <option selected>Choose Category</option>
+                                         {% for c in category %}
+                                         <option value="{{c.name}}">{{c.name}}</option>
+                                         {% endfor %}
+                                     </select>
+                                 </div>
+                             </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success btn-primary save-changes-btn"><i class="fas fa-database"></i> Submit </button>
+                      </div>
+                </div>
+          </div>
+    </div>
+
+<!-- xxxxxxxxxxxxx End of Add Modal xxxxxxxxxxxxxxxxxxxxxxxx -->
+
+    <!-- Edit Modal -->
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                     <form method="POST" action="" enctype="multipart/form-data" id="edit_post_form">
+                         {% csrf_token %}
+                         <div class="message-success"></div>
+                         <div class="form-group m-3">
+                             <label>Author</label>
+                             <input required name="title" type="text" placeholder="Author" class="form-control author-edit-field">
+                         </div>
+                         <div class="form-group m-3">
+                             <label>Title</label>
+                             <input required name="title" type="text" placeholder="Enter a title" class="form-control title-edit-field">
+                         </div>
+                         <div class="form-group m-3">
+                             <label>Country</label>
+                             <input required name="country" placeholder="Country" class="form-control descr-edit-field">
+                         </div>
+                         <div class="form-group m-3">
+                             <label>Category</label>
+                             <select required name="category" class="form-control category-edit-field">
+                                 <option selected>Choose Category</option>
+                                 {% for c in category %}
+                                 <option value="{{c.name}}">{{c.name}}</option>
+                                 {% endfor %}
+                             </select>
+                         </div>
+                     </form>
+                  </div>
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success btn-primary edit-changes-btn"><i class="fas fa-database"></i> Update </button>
+                  </div>
+            </div>
+      </div>
+</div>
+
+<!-- xxxxxxxxxxxxxx End Edit Modal xxxxxxxxxxxxxxxxxxxxxx -->
+
+    <div class="search-form">
+        <form id="search-form" autocomplete="off">
+            {% csrf_token %}
+            <input type="text" id="search-input" class="p-3 w-50 search" placeholder="search for i.e. witcher">
+        </form>
+        <div id="results-box" class="results-card"></div>
+    </div>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="../images/attachment.png">
+                    <h2 class="logo_text">Follow<span class="warning">Time</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a class="menu-link active" href="#">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a class="menu-link" href="{% url 'mainapp:home' %}">
+                    <span class="material-icons-sharp">home</span>
+                    <h3>Home</h3>
+                </a>
+                <a class="menu-link" href="{% url 'mainapp:add' %}">
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Add New Story</h3>
+                </a>
+                <a class="menu-link" href="{% url 'mainapp:user' %}">
+                    <span class="material-icons-sharp">settings</span>
+                    <h3>Visit Profile</h3>
+                </a>
+                <a class="menu-link" href="{% url 'mainapp:logout' %}">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <!------------------------ End of Aside ------------------->
+        <main>
+
+            <div class="insights">
+                {% for cat in category_count %}
+                <a class="{{cat.name}}" href="{% url 'mainapp:view_category' cat.name %}">
+                    <span class="material-icons-sharp"></span>
+                    <div class="middle">
+                        <div class="left">
+                            <h1 class="text-light">{{cat.name|title}}</h1>
+                            <h2 class="text-light">Total Articles {{ cat.posts_count }}</h2>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+                <!----------------- End of Incomes ------------------>
+            </div>
+
+            <div class="recent-orders">
+                <h1> Wishlist </h1>
+                <table>
+                    <thead>
+                        <tr>
+                             <th scope="col">Author</th>
+                                  <th scope="col">Title</th>
+                                  <th scope="col">Country</th>
+                                  <th scope="col">Category</th>
+                                  <th scope="col">Username</th>
+                            </tr>
+                    </thead>
+                    <tbody id="posts-box">
+                            {% for pub in publisher %}
+                                <tr id="table-delete" data-id="{{pub.pk}}">
+                                    <th scope="row">{{pub.publisher_name|title}}</th>
+                                    <th class="editable" data-type="title">{{pub.publisher_title|title}}</th>
+                                    <th class="editable" data-type="country">{{pub.country|title}}</th>
+                                    <th class="editable" data-type="category">{{pub.category|title}}</th>
+                                    <th class="editable" data-type="username">{{pub.postman|title}}</th>
+                                    <td class="btn-posts__box"><button type="button" class="btn btn-update" data-toggle="modal" data-id="{{pub.pk}}" data-target="#editModal">
+                                                             <span class="material-icons-sharp">edit</span></button></td>
+                                    <td class="btn-posts__box"><button class="btn btn-delete" id="{{pub.pk}}"><span class="material-icons-sharp">delete</span></button></td>
+                                </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+         <!----------------- End of MAIN ------------------>
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp isactive"> light_mode </span>
+                    <span class="material-icons-sharp"> dark_mode </span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>{{user}}</b></p>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="{{request.user.postman.profile_pic.url}}">
+                    </div>
+                </div>
+            </div>
+            <!--------- End of Top ---------->
+            <div class="recent-updates">
+                <h2>Recent Updates</h2>
+                <div class="updates">
+                    {% for post in filter_posts %}
+                    <a class="update" href="{% url 'mainapp:post' post.id %}">
+                        <div class="profile-photo">
+                            <img src="{{post.image.url}}">
+                        </div>
+                        <div class="message">
+                            <p><b>{{post.title}}</b></p>
+                            <div class="rate-star">
+                                <span class="text-muted"> <b>{{post.score}}</b> </span>
+                                <span class="material-icons-sharp rate-star__visible">rate_star</span>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!------------------- END OF RECENT UPDATED ---------------------->
+            <div class="sales-analytics">
+                <h2>Active Users</h2>
+                {% for p in postman %}
+                <div class="item online">
+                    <div class="icon">
+                        <img src="{{p.profile_pic.url}}">
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3> {{p.name}}</h3>
+                            <small class="text-muted">Last 24 hours</small>
+                        </div>
+                        <h5 class="success">+39%</h5>
+                        <h3>3849</h3>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="item add-product">
+                    <div>
+
+                        <button class="add-product__visible" type="button" data-toggle="modal" data-target="#addModal">
+                            <span class="material-icons-sharp">add</span>
+                            Add Post To Wishlist
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="{% static 'js/publish.js' %}" defer></script>
+<script type="text/javascript" src="{% static 'js/test.js' %}" defer> </script>
+</html>

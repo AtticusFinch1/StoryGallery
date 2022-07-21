@@ -1,0 +1,70 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+ {% block content %}
+
+   <link rel="stylesheet" href="{% static 'css/category.css' %}">
+   <div class="wrapper">
+       <div class="wrapper-wrapper__card">
+           <div class="wrapper-background">
+               <img class="wrapper__background--image" >
+               <div class="wrapper__background--text">
+                   {{background_text}}
+               </div>
+           </div>
+            <div class="card-wrapper">
+                {% for post in posts %}
+                    <div class="card" data-id="test-card-image">
+                        <div class="face front">
+                            <ul class="badges">
+                                <li class="badges__item badges__item--rate ri-earth-line">
+                                    <span class="badges__title">{{post.score}}</span>
+                                </li>
+                            </ul>
+                            <img src="{{post.image.url}}" alt="">
+                            <h3>{{post.title}}</h3>
+                        </div>
+                        <div class="face back">
+                            <p> {{post.description|slice:":400"}}...</p>
+                            <div class="link">
+                                <a href="{% url 'mainapp:post' post.id %}">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+       </div>
+    <!-- carousel functionality -->
+
+        <div class="carousel">
+            <button class="carousel__button carousel__button--left is-hidden">
+                <i class="fas fa-long-arrow-alt-left"></i>
+            </button>
+            <div class="carousel__track-container">
+                <ul class="carousel__track">
+                    {% for post in posts_filter %}
+                    <li class="carousel__slide">
+                        <div class="carousel__slide--title">
+                             <a href="{% url 'mainapp:post' post.id %}" >{{post.title}}</a>
+                        </div>
+                        <img class="carousel__image" src="{{post.image.url}}" alt="">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <button class="carousel__button carousel__button--right">
+                <i class="fas fa-long-arrow-alt-right"></i>
+            </button>
+            <div class="carousel__nav">
+                {% for post in posts_filter %}
+                <button class="carousel__indicator"></button>
+                {% endfor %}
+            </div>
+        </div>
+   </div>
+
+<!-- end of carousel functionality -->
+
+
+<script type="text/javascript" src="{% static 'js/category.js' %}" defer> </script>
+<script type="text/javascript" src="{% static 'js/main.js' %}" defer> </script>
+{% endblock %}

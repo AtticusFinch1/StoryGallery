@@ -1,0 +1,31 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/posts.css' %}">
+    <i class="fas fa-bars"></i>
+    <div id="parallax" class="pimg1" style="background-image: url('{{post.image.url}}')">
+        <div class="ptext">
+            <a href="{% url 'mainapp:view_category' post.category %}" id="parallax-text" class="border">
+              {{post.title}}
+            </a>
+        </div>
+    </div>
+
+    <section class="section section-dark">
+        <p>{{post.description}}</p>
+        <div class="col text-center">
+            <form class="rate-form" action="" method="POST" id="{{post.id}}">
+                {% csrf_token %}
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="third"></button>
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="forth"></button>
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+            </form>
+        </div>
+        <div id="confirm-box"></div>
+    </section>
+
+<script type="text/javascript" src="{% static 'js/posts.js' %}" defer> </script>
+{% endblock %}

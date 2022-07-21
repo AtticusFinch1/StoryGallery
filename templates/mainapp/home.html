@@ -1,0 +1,82 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="main-container">
+        <section class="home-intro">
+            <h1>Explore, Create, Enjoy!</h1>
+        </section>
+        <p>The American travel writer Paul Theroux once wrote: "Tourists don't know where they've been, travelers don't know where they're going."
+        Healthy pursuits are like traveling. We know there is a wonderland called wellness. But, there are no fixed routes to reach there. The pursuits need effort and determination. We cannot act like tourists who don't know where they've been. We must take notes of warning signs sent by our bodies.
+        On the journey to wellness, there are many dangers to be avoided; there are many footsteps to be taken; unfortunately, there are no short-cuts.
+        Travelers walking in the night follow North Star <span><img src="../static/images/icons8-sparkling.gif" alt="post"> </span>. Healthy pursuits work similarly. We know our goal; we know the signposts; we know the dangers on the road; we can adjust pace if we are tired; we can change travel plans due to the weather. But, We walk steadily and persistently. With my companionship, hopefully, your journey will be made easier.
+        May all be fed. May all be healed. May all be loved.
+        </p>
+<!--        <div class="filter-container">-->
+<!--            <div class="category-head">-->
+<!--                <ul>-->
+<!--                    <a href="{% url 'mainapp:home' %}" class="category-title" id="all">-->
+<!--                        <li>All</li>-->
+<!--                        <span><i class="fas fa-border-all"></i></span>-->
+<!--                    </a>-->
+<!--                    <a href="{% url 'mainapp:home' %}?category=culture" class="category-title" id="culture">-->
+<!--                        <li>Culture</li>-->
+<!--                        <span><i class="fas fa-theater-masks"></i></span>-->
+<!--                    </a>-->
+<!--                    </a>-->
+<!--                    <a href="{% url 'mainapp:home' %}?category=politics" class="category-title" id="politics">-->
+<!--                        <li>Politics</li>-->
+<!--                        <span><i class="fas fa-landmark"></i></span>-->
+<!--                     </a>-->
+<!--                    <a href="{% url 'mainapp:home' %}?category=finance" class="category-title" id="finance">-->
+<!--                        <li>Finance</li>-->
+<!--                        <span><i class="fas fa-chart-area"></i></span>-->
+<!--                    </a>-->
+<!--                    <a href="{% url 'mainapp:home' %}?category=business" class="category-title" id="business">-->
+<!--                        <li>Business</li>-->
+<!--                        <span><i class="fas fa-coins"></i></span>-->
+<!--                    </a>-->
+<!--                    <a href="{% url 'mainapp:home' %}?category=sports" class="category-title" id="sports">-->
+<!--                        <li>Sports</li>-->
+<!--                        <span><i class="fas fa-running"></i></span>-->
+<!--                    </a>-->
+<!--                </ul>-->
+<!--            </div>-->
+            <div class="posts-collect">
+                <div class="posts-main-container">
+                    <div id="posts-box"></div>
+                    <div id="spinner-box" class="text-center mb-3">
+                        <div class="spinner-border" role="status"> </div>
+                    </div>
+                <!-- single post -->
+<!--                {% for post in posts %}-->
+<!--                    <div class="all {{post.category.name}}">-->
+<!--                        <div class="post-img">-->
+<!--                            <img src="{{post.image.url}}" alt="post">-->
+<!--                            <span class="category-name">{{post.category.name}}</span>-->
+<!--                        </div>-->
+<!--                        <div class="post-content">-->
+<!--                            <div class="post-content-top">-->
+<!--                                <span><i class="fas fa-calendar"></i>{{post.created}}</span>-->
+<!--                                <span><i class="fas fa-comment"></i>34</span>-->
+<!--                            </div>-->
+<!--                            <h2>{{post.title}}</h2><p>{{post.description|slice:":300"}} ... </p>-->
+<!--                        </div>-->
+<!--                        <a href="{% url 'mainapp:post' post.id %}" type="button" class="read-btn">Read All</a>-->
+<!--                    </div>-->
+<!--                {% endfor %}-->
+                    <!-- end of single post -->
+                </div>
+                {% if request.user.is_staff %}
+                <div class="text-center mb-3" id="end-box">
+                        <button class="btn btn-primary" id="load-btn">Load More</button>
+                </div>
+                <div id="progress">
+                    <span id="progress-value">&#x1F815;</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="{% static 'js/main.js' %}" defer> </script>
+ {% endblock %}
